@@ -5,9 +5,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const port = 8080;
 app.use(body_parser_1.default.json());
+app.use((0, cors_1.default)());
+app.use((req, res, next) => {
+    setTimeout(() => {
+        next();
+    }, 1000);
+});
 const users = [
     { id: 1, name: 'Alice Johnson', email: 'alice.johnson@example.com' },
     { id: 2, name: 'Bob Smith', email: 'bob.smith@example.com' },

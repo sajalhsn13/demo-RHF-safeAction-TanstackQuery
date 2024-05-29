@@ -1,5 +1,6 @@
 'use client'
 
+import { UserForm, userFormAction, userFormSchema } from '@/actions/user-form-action'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -10,33 +11,39 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useAction } from 'next-safe-action/hooks'
 import { useForm } from 'react-hook-form'
-
-import { z } from 'zod'
-
-// 1: ZOD schema
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-  email: z.string().email(),
-})
-
-// 2: type of the schema
-type Form = z.infer<typeof formSchema>
 
 export default function Home() {
   // 3: useForm of Form type with resolver and default values
-  const form = useForm<Form>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<UserForm>({
+    resolver: zodResolver(userFormSchema),
     defaultValues: {
       username: '',
       email: '',
     },
   })
 
+  const useUserFormAction = useAction(userFormAction, {
+    onExecute: (input) => {
+      console.log('onExecute', input)
+    },
+    onSuccess: (data, input, reset) => {
+      console.log('onSuccess', data, input)
+    },
+    onSettled: (result, input, reset) => {
+      console.log('onSettled', result, input)
+    },
+    onError: (error, input, reset) => {
+      console.log('onError', error, input)
+    },
+  })
+
   // 4: onSubmit function
-  function onSubmit(values: Form) {
-    console.log(values)
+  function onSubmit(values: UserForm) {
+    useUserFormAction.execute(values)
     form.reset()
   }
 
@@ -76,7 +83,11 @@ export default function Home() {
             />
           </div>
           <div className=" mt-2">
-            <Button className="w-full" type="submit">
+            <Button
+              className={cn('w-full')}
+              type="submit"
+              disabled={useUserFormAction.status === 'executing'}
+            >
               Submit
             </Button>
           </div>
