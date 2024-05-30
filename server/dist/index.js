@@ -16,16 +16,16 @@ app.use((req, res, next) => {
     }, 1000);
 });
 const users = [
-    { id: 1, name: 'Alice Johnson', email: 'alice.johnson@example.com' },
-    { id: 2, name: 'Bob Smith', email: 'bob.smith@example.com' },
-    { id: 3, name: 'Carol White', email: 'carol.white@example.com' },
-    { id: 4, name: 'David Brown', email: 'david.brown@example.com' },
-    { id: 5, name: 'Eve Davis', email: 'eve.davis@example.com' },
-    { id: 6, name: 'Frank Wilson', email: 'frank.wilson@example.com' },
-    { id: 7, name: 'Grace Lee', email: 'grace.lee@example.com' },
-    { id: 8, name: 'Henry Kim', email: 'henry.kim@example.com' },
-    { id: 9, name: 'Isabella Moore', email: 'isabella.moore@example.com' },
-    { id: 10, name: 'Jack Taylor', email: 'jack.taylor@example.com' },
+    { id: 1, username: 'Alice Johnson', email: 'alice.johnson@example.com' },
+    { id: 2, username: 'Bob Smith', email: 'bob.smith@example.com' },
+    { id: 3, username: 'Carol White', email: 'carol.white@example.com' },
+    { id: 4, username: 'David Brown', email: 'david.brown@example.com' },
+    { id: 5, username: 'Eve Davis', email: 'eve.davis@example.com' },
+    { id: 6, username: 'Frank Wilson', email: 'frank.wilson@example.com' },
+    { id: 7, username: 'Grace Lee', email: 'grace.lee@example.com' },
+    { id: 8, username: 'Henry Kim', email: 'henry.kim@example.com' },
+    { id: 9, username: 'Isabella Moore', email: 'isabella.moore@example.com' },
+    { id: 10, username: 'Jack Taylor', email: 'jack.taylor@example.com' },
 ];
 let nextUserId = 11;
 app.get('/', (req, res) => {
